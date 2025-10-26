@@ -4,13 +4,16 @@
     --black : #000;
     --white : #fff;
     --blue : #2c3d92;
-    --og : #F2591D;
+    --og : #e6c300;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* หากต้องการใช้ Montserrat ให้ลบ comment บรรทัดนี้
+    font-family: "Montserrat", sans-serif; 
+    */
     font-family: "Arial", sans-serif;
 }
 
@@ -18,94 +21,252 @@
 .container{
     max-width: 1330px;
     margin: 0 auto;
+    /* เพิ่ม padding ซ้าย-ขวาเล็กน้อยสำหรับหน้าจอแท็บเล็ต/มือถือ */
+    padding: 0 15px;
 }
 
 /* header */
 
 header {
-    height: 40px;
+    /* height: 40px; (ย้ายไปใน .top-bar แทน) */
     background-color: var(--black);
     color: var(--white);
+}
+
+/* top-menu */
+header .top-bar{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+header .top-bar .top-bar-tel-email{
+    display: flex;
+    gap: 15px; /* เพิ่มช่องว่างระหว่างเบอร์กับอีเมล */
+}
+
+header .top-bar .top-bar-tel-email i {
+    margin-left: 0; /* เปลี่ยนจาก 20px เป็น 0 เพราะใช้ gap แทน */
+    display: flex;
+    align-items: center; /* จัดไอคอนกับข้อความให้อยู่กลาง */
+}
+
+header .top-bar .top-bar-tel-email i p{
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+header .top-bar .top-bar-tel-email i p:hover{
+    color: var(--og);
+}
+
+header .top-bar .top-bar-shoptoyou {
+    margin-left: 5px;
+    /* padding-right: 30px; (ลบออก เพราะ .container จัดการแล้ว) */
+    cursor: pointer;
+}
+
+header .top-bar .top-bar-shoptoyou p:hover{
+    color: var(--og);
+}
+
+
+/* header-container */
+.header-container{
+    height: 80px;
+    position: relative;
+    background-color: var(--blue);
+}
+
+/* แก้ไข Selector ให้ตรงกับ HTML ที่ซ้อนกัน */
+.header-container .user-interface{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px; /* ปรับความสูงให้เต็ม .header-container */
+}
+
+.header-container .user-interface .logo img {
+    height: 100px; /* รูปนี้จะล้นออกมา 20px (ตามดีไซน์ JIB) */
+    display: block;
+    /* เพิ่ม transition ให้สวยงาม */
+    transition: transform 0.2s ease;
+}
+
+.header-container .user-interface .logo img:hover {
+    transform: scale(1.05); /* ขยายโลโก้เล็กน้อยเมื่อ hover */
+}
+
+.header-container .user-interface .search-container {
+    display: flex;
+    width: 60%;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: var(--white);
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+.header-container .user-interface .search-container .search-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.header-container .user-interface .search-container .search-btn{
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 20px;
+    width: 8rem;
+    height: 39px;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 5px;
+    border: none;
+    font-size: 16px;
+    /* เพิ่มการจัดเรียงไอคอนและข้อความ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.header-container .user-interface .search-container .search-btn:hover{
+    background-color: var(--og);
+}
+
+/* User Windows (Cart & Login) */
+.header-container .user-interface .user-windows{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-container .user-interface .user-windows .cart-icon {
+    background-color: var(--white);
+    color: var(--blue);
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 9px;
+    position: relative;
+    border-radius: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+}
+
+.header-container .user-interface .user-windows .cart-icon:hover{
+    color: var(--og);
+    transform: scale(1.1);
+}
+
+.header-container .user-interface .user-windows .login-icon{
+    background-color: var(--white);
+    color: var(--blue);
+    border-radius: 40px;
+    height: 3rem;
+    width: 9rem;
+    font-size: 18px; /* ปรับขนาดฟอนต์เล็กน้อย */
+    cursor: pointer;
+    border: none;
+    /* เพิ่มการจัดเรียงไอคอนและข้อความ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease-in-out;
+}
     
-    /* top-menu */
-    .top-bar{
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 40px;
+.header-container .user-interface .user-windows .login-icon:hover{
+    color: var(--og);
+    transform: scale(1.05);
+} 
 
-        .top-bar-tel-email{
-            display: flex;
-            
-            i {
-                margin-left: 20px;
-                display: flex;
-                
-                p{
-                    margin-left: 5px;
-                    cursor: pointer;
-                }
 
-                p:hover{
-                    color: var(--og);
-                }
-            }
+/* === ส่วน Responsive ที่เราคุยกัน (แปลงเป็น CSS ปกติแล้ว) === */
 
-        }
-        .top-bar-shoptoyou {
-            margin-left: 5px;
-            padding-right: 30px;
-            cursor: pointer;
-        }
+@media screen and (max-width: 768px) {
 
-        p:hover{
-            color: var(--og);
-        }
-
+    /* --- Top Bar --- */
+    header {
+        height: auto; /* ปรับความสูง header ให้เป็น auto */
     }
-    /* header-container */
-    .header-container{
-        height: 80px;
-        position: relative;
-        background-color: var(--blue);
 
-        .user-interface{
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-
-            img {
-            height: 100px;
-            display: block;
-            }
-        .search{
-            display: flex;
-        }    
-            .search-product{
-                position: relative;
-                border-radius: 500px;
-                width: 700px;
-                height: 50px;
-                padding-left: 10px;
-                border: 2px solid var(--black);
-            }
-
-            .search-btn{
-                position: absolute;
-                border-radius: 500px;
-                height: 35px;
-                width: 70px;
-                font-size: 15px;
-                margin-top: 2.5px;
-                right: 300px;
-                
-            }
-
-        }
-
-        
+    header .top-bar {
+        flex-direction: column; /* จัดเรียง .top-bar-tel-email และ .top-bar-shoptoyou เป็นแนวตั้ง */
+        height: auto;
+        gap: 10px; /* เพิ่มช่องว่างระหว่างส่วนบนกับส่วนล่าง */
+        padding: 10px 0; /* เพิ่ม padding ให้ .top-bar */
     }
+
+    header .top-bar .top-bar-tel-email {
+        flex-direction: column; /* จัดเรียงเบอร์โทรและอีเมลเป็นแนวตั้ง */
+        align-items: center; /* จัดให้อยู่กึ่งกลาง */
+        gap: 5px;
+    }
+
+    header .top-bar .top-bar-tel-email i {
+        margin-left: 0; /* ลบ margin ด้านซ้ายเมื่ออยู่แนวตั้ง */
+    }
+
+    header .top-bar .top-bar-shoptoyou {
+        padding-right: 0; /* ลบ padding ด้านขวา */
+    }
+
+    /* --- Header Container (Logo, Search, Icons) --- */
+    .header-container {
+        height: auto; /* ปรับความสูง container เป็น auto */
+    }
+
+    .header-container .user-interface {
+        flex-direction: column; /* จัดเรียง โลโก้, ช่องค้นหา, ไอคอน เป็นแนวตั้ง */
+        height: auto;
+        gap: 15px; /* เพิ่มช่องว่างระหว่าง โลโก้, ค้นหา, ไอคอน */
+        padding: 15px 10px; /* เพิ่ม padding แนวตั้งและแนวนอนเล็กน้อย */
+    }
+
+    .header-container .user-interface .logo img {
+        height: 80px; /* ลดขนาดโลโก้ลงบนมือถือ */
+    }
+
+    .header-container .user-interface .search-container {
+        width: 95%; /* ขยายช่องค้นหาให้เกือบเต็มความกว้าง */
+    }
+
+    /* ย่อปุ่มค้นหาบนมือถือ */
+    .header-container .user-interface .search-container .search-btn {
+        width: 4rem; /* ย่อปุ่ม */
+    }
+
+    /* ซ่อนคำว่า "ค้นหา" บนมือถือ ให้เหลือแต่ไอคอน */
+    .header-container .user-interface .search-container .search-btn span {
+        display: none;
+    }
+
+    /* จัดเรียงปุ่ม ตะกร้า กับ ล็อกอิน ให้อยู่แนวนอน */
+    .header-container .user-interface .user-windows {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* navbar */
+nav{
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
 }
